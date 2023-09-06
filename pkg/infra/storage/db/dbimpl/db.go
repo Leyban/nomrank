@@ -99,7 +99,7 @@ func (gs *sqlxdb) WithTransaction(ctx context.Context, fn func(sess db.Tx) error
 	return gs.inTransaction(ctx, fn)
 }
 
-func (gs *sqlxdb) InTransaction(ctx context.Context, fn func(ctx context.Context) error ) error {
+func (gs *sqlxdb) InTransaction(ctx context.Context, fn func(ctx context.Context) error) error {
 	return gs.inTransaction(ctx, func(sess db.Tx) error {
 		withValue := context.WithValue(ctx, ContextSessionKey{}, sess)
 		return fn(withValue)
